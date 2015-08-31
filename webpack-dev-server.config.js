@@ -1,0 +1,2 @@
+var webpack = require('webpack');
+
