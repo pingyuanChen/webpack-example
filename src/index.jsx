@@ -1,6 +1,7 @@
 var React = require('react');
 var injectTapEventPlugin = require('react-tap-event-plugin');
-var Router = require('react-router');
+// var Router = require('react-router');
+var page = require('page');
 var DefaultRoute = Router.DefaultRoute;
 var Link = Router.Link;
 var Route = Router.Route;
@@ -13,7 +14,7 @@ var Dialog = require('./app/dialog');
 var IconButtons = require('./app/icon-button');
 var DropdownMenu = require('./app/dropdown-menu');
 var Toast = require('./app/toast');
-var Tab = require('./app/tab');
+// var Tab = require('./app/tab');
 
 
 injectTapEventPlugin();
@@ -22,32 +23,45 @@ var App = React.createClass({
   render: function(){
     return (
       <div>
-        <Sidebar sidebarData={model.sidebarData}></Sidebar>
-
-        <div className="main-content">
-          <RouteHandler />
+        <Sidebar sidebarData={model.sidebarData} selectedVal={this.props.selectedVal}></Sidebar>
+        <div id="main-content" className="main-content">
+          {this.props.component}
         </div>
       </div>
     );
   }
 });
 
+var renderPage = function(ctx){
+  var map = {
+    buttons: Buttons,
+    dialog: Dialog,
+    'icon-button': IconButtons,
+    'toast': Toast,
+    'dropdown-menu': DropdownMenu
+  };
+  if(ctx.params.page == 'tab'){
+    require.ensure([], function(){
+      var Tab = require('./app/tab');
+      React.render(
+        <App 
+          component={Tab}
+          selectedVal="tab" />
+      , document.getElementById('main-content'))
+    }, 'tab-bundle');
+  }else{
+    React.render(
+      <App 
+        component={map[ctx.params.page]}
+        selectedVal={ctx.params.page} />
+    , document.getElementById('main-content'))
+  }
+};
 
-var routes = (
-  <Route name="app" path="/" handler={App}>
-    <Route name="buttons" path="/buttons" handler={Buttons} />
-    <Route name="dialog" path="/dialog" handler={Dialog} />
-    <Route name="icon-button" path="/icon-button" handler={IconButtons} />
-    <Route name="dropdown-menu" path="/dropdown-menu" handler={DropdownMenu} />
-    <Route name="toast" path="/toast" handler={Toast} />
-    <Route name="tab" path="/tab" handler={Tab} />
-    <DefaultRoute handler={Buttons}/>
-  </Route>
-);
+page('/:page', renderPage);
+page();
 
-Router.run(routes, function(Handler){
-  React.render(<Handler />, document.getElementById('main'))
-});
+
 
 
 

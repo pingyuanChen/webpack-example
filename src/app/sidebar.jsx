@@ -6,7 +6,7 @@ var Route = Router.Route;
 var RouteHandler = Router.RouteHandler;
 var Components = require('react-ui-components');
 var Menu = Components.Menu;
-
+var page = require('page');
 
 
 module.exports = React.createClass({
@@ -21,7 +21,8 @@ module.exports = React.createClass({
           menuItems={this.props.sidebarData}
           displayKey="display"
           valKey="link"
-          itemTpl={this._itemTpl} >
+          itemTpl={this._itemTpl}
+          onItemTap={this._onItemTap} >
         </Menu>
       </div>
     );
@@ -33,9 +34,16 @@ module.exports = React.createClass({
     return (
       <div data-val={displayVal} className={selected ? 'selected' : ''}>
         <span className="menu-item-text">
-          <Link className="menu-item-link" to={displayVal}>{displayText}</Link>
+          <span className="menu-item-link" to={displayVal}>{displayText}</span>
         </span>
       </div>
     );
+  },
+
+  _onItemTap: function(e, index, data){
+    page(data.link);
   }
 });
+
+
+
