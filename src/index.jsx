@@ -1,7 +1,6 @@
 var React = require('react');
 var injectTapEventPlugin = require('react-tap-event-plugin');
-// var Router = require('react-router');
-var page = require('page');
+var Router = require('react-router');
 var DefaultRoute = Router.DefaultRoute;
 var Link = Router.Link;
 var Route = Router.Route;
@@ -16,6 +15,7 @@ var DropdownMenu = require('./app/dropdown-menu');
 var Toast = require('./app/toast');
 // var Tab = require('./app/tab');
 
+require('page')
 
 injectTapEventPlugin();
 
@@ -43,6 +43,8 @@ var renderPage = function(ctx){
   if(ctx.params.page == 'tab'){
     require.ensure([], function(){
       var Tab = require('./app/tab');
+      require('page');
+      var async = require('async');
       React.render(
         <App 
           component={Tab}

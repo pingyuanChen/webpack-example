@@ -18,7 +18,8 @@ module.exports = {
 
   output: {
     path: buildPath,
-    filename: '[name].js'
+    filename: '[name].js',
+    pathinfo: true
   },
 
   resolve: {

@@ -1,0 +1,13 @@
+{
+  "name": "jquery-hz2py",
+  "homepage": "https://github.com/edisonator/jquery-hz2py",
+  "_release": "e8595003a3",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "e8595003a3c37e4572329fa65aed76dc0a12ea10"
+  },
+  "_source": "https://github.com/edisonator/jquery-hz2py.git",
+  "_target": "*",
+  "_originalSource": "https://github.com/edisonator/jquery-hz2py.git"
+}

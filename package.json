@@ -7,7 +7,7 @@
   "scripts": {
     "prepublish": "",
     "start": "webpack-dev-server --config webpack-dev-server.config.js --progress --inline --colors",
-    "build": "webpack --config webpack-production.config.js --progress --colors"
+    "build": "webpack --config webpack-production.config.js --progress --colors --display-error-details"
   },
   "keywords": [
     "react",
@@ -15,7 +15,6 @@
   ],
   "license": "",
   "dependencies": {
-    "page": "^1.6.3",
     "react": ">=0.13",
     "react-router": "^0.13.3",
     "react-tap-event-plugin": ">=0.1.3",
