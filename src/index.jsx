@@ -45,6 +45,7 @@ var renderPage = function(ctx){
       var Tab = require('./app/tab');
       require('page');
       var async = require('async');
+      var hz2py = require('jquery-hz2py');   //not work because of without main field
       React.render(
         <App 
           component={Tab}
